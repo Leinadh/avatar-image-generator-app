@@ -1,4 +1,4 @@
 streamlit
 Pillow
-streamlit_cropper
+streamlit-cropper
 time

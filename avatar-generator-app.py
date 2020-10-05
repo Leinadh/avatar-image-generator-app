@@ -28,9 +28,8 @@ if uploaded_file is not None:
         with st.spinner(text='Generating avatar...'):
             model = Avatar_Generator_Model()
             model.load_weights()
-            print('loading')
             img_cartoon = model.generate(cropped_img)
-            
+
         st.image(img_cartoon, caption='Your avatar.',
                  use_column_width=True)
         st.balloons()

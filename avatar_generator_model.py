@@ -29,7 +29,8 @@ class Avatar_Generator_Model():
         return self.__to_cartoon(face, output_path)
 
     def load_weights(self, weights_path='weights/'):
-        self.e1.load_state_dict(torch.load(weights_path + 'e1.pth', map_location=lambda storage, loc: storage))
+        self.e1.load_state_dict(torch.load(
+            weights_path + 'e1.pth', map_location=lambda storage, loc: storage))
         self.e1.eval()
         self.e_shared.load_state_dict(
             torch.load(weights_path + 'e_shared.pth', map_location=lambda storage, loc: storage))
@@ -37,7 +38,8 @@ class Avatar_Generator_Model():
         self.d_shared.load_state_dict(
             torch.load(weights_path + 'd_shared.pth', map_location=lambda storage, loc: storage))
         self.d_shared.eval()
-        self.d2.load_state_dict(torch.load(weights_path + 'd2.pth', map_location=lambda storage, loc: storage))
+        self.d2.load_state_dict(torch.load(
+            weights_path + 'd2.pth', map_location=lambda storage, loc: storage))
         self.d2.eval()
         self.denoiser.load_state_dict(
             torch.load(weights_path + 'denoiser.pth', map_location=lambda storage, loc: storage))

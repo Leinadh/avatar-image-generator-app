@@ -29,18 +29,18 @@ class Avatar_Generator_Model():
         return self.__to_cartoon(face, output_path)
 
     def load_weights(self, weights_path='weights/'):
-        self.e1.load_state_dict(torch.load(weights_path + 'e1.pth'))
+        self.e1.load_state_dict(torch.load(weights_path + 'e1.pth', map_location=lambda storage, loc: storage))
         self.e1.eval()
         self.e_shared.load_state_dict(
-            torch.load(weights_path + 'e_shared.pth'))
+            torch.load(weights_path + 'e_shared.pth', map_location=lambda storage, loc: storage))
         self.e_shared.eval()
         self.d_shared.load_state_dict(
-            torch.load(weights_path + 'd_shared.pth'))
+            torch.load(weights_path + 'd_shared.pth', map_location=lambda storage, loc: storage))
         self.d_shared.eval()
-        self.d2.load_state_dict(torch.load(weights_path + 'd2.pth'))
+        self.d2.load_state_dict(torch.load(weights_path + 'd2.pth', map_location=lambda storage, loc: storage))
         self.d2.eval()
         self.denoiser.load_state_dict(
-            torch.load(weights_path + 'denoiser.pth'))
+            torch.load(weights_path + 'denoiser.pth', map_location=lambda storage, loc: storage))
         self.denoiser.eval()
 
     def __extract_face(self, face_image):
@@ -52,17 +52,17 @@ class Avatar_Generator_Model():
 
     def __to_cartoon(self, face, output_path):
         transform = transforms.Compose(
-            [transforms.Resize(64, 64), transforms.ToTensor()])
+            [transforms.Resize((64, 64)), transforms.ToTensor()])
         face = transform(face).float()
-        #face = Variable(face, requires_grad=False)
+        x = torch.stack(32*[face])
         with torch.no_grad():
-            output = self.e1(face)
+            output = self.e1(x)
             output = self.e_shared(output)
             output = self.d_shared(output)
             output = self.d2(output)
             output = self.denoiser(output)
         if output_path is not None:
             # save to path
-            # fileName.jpg part of output_path, use format parameter?
+            # fileName.jpg part of output_path
             torchvision.utils.save_image(tensor=output, fp=output_path)
-        return torchvision.transforms.ToPILImage(output)
+        return torchvision.transforms.ToPILImage()(output[0])

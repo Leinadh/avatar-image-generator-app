@@ -2,3 +2,4 @@ streamlit
 Pillow>=7.1.0
 streamlit-cropper
 torch
+torchvision

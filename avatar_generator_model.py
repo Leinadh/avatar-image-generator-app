@@ -56,7 +56,7 @@ class Avatar_Generator_Model():
         transform = transforms.Compose(
             [transforms.Resize((64, 64)), transforms.ToTensor()])
         face = transform(face).float()
-        x = torch.stack(32*[face])
+        x = face.unsqueeze(0)
         with torch.no_grad():
             output = self.e1(x)
             output = self.e_shared(output)

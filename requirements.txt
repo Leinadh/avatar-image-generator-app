@@ -1,3 +1,4 @@
 streamlit
-Pillow
+Pillow>=7.1.0
 streamlit-cropper
+torch

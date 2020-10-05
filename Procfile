@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run avatar-generator-app.py
+web: sh setup.sh && streamlit run app.py

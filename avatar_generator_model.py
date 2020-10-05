@@ -25,8 +25,8 @@ class Avatar_Generator_Model():
         self.denoiser = model.Denoiser()
 
     def generate(self, face_image, output_path=None):
-        face = self.__extract_face(face_image)
-        return self.__to_cartoon(face, output_path)
+        # face_image = self.__extract_face(face_image)
+        return self.__to_cartoon(face_image, output_path)
 
     def load_weights(self, weights_path='weights/'):
         self.e1.load_state_dict(torch.load(
@@ -45,12 +45,12 @@ class Avatar_Generator_Model():
             torch.load(weights_path + 'denoiser.pth', map_location=lambda storage, loc: storage))
         self.denoiser.eval()
 
-    def __extract_face(self, face_image):
-        #import model
-        # segment image
-        # remove background
-        # return face
-        return face_image
+    # def __extract_face(self, face_image):
+    #     #import model
+    #     # segment image
+    #     # remove background
+    #     # return face
+    #     return face_image
 
     def __to_cartoon(self, face, output_path):
         transform = transforms.Compose(

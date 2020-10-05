@@ -1,5 +1,6 @@
+-f https://download.pytorch.org/whl/torch_stable.html
 streamlit
 Pillow>=7.1.0
 streamlit-cropper
-https://download.pytorch.org/whl/cpu/torch-1.3.1%2Bcpu-cp37-cp37m-linux_x86_64.whl
+torch==1.5.0+cpu
 torchvision
